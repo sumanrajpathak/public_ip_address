@@ -51,7 +51,7 @@ class IpAddress {
   static Future<Map<String, dynamic>> getAllData({Ip version = Ip.v4}) async {
     try {
       Map<String, dynamic> _json = jsonDecode((await http.get(Uri.parse(
-              'https://ip${(version.toString())[4]}.seeip.org/geoip')))
+              'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org/geoip')))
           .body);
       return {
         'ip': _json['ip'],
@@ -89,7 +89,7 @@ class IpAddress {
   static Future<String> getIp({Ip version = Ip.v4}) async {
     try {
       return jsonDecode(jsonEncode((await http.get(
-              Uri.parse('https://ip${(version.toString())[4]}.seeip.org/')))
+              Uri.parse('https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org')))
           .body));
     } on Exception catch (e) {
       print(e);
