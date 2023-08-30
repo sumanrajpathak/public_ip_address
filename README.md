@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/http)
+[![package publisher](https://img.shields.io/pub/publisher/http.svg)](https://pub.dev/packages/http/publisher)
 # IP Address
 
 
@@ -28,13 +30,13 @@ Add this to your dependencies :
 
 ```yaml
 dependencies:
-  ip_address: ^1.0.0
-```
 
+  public_ip_address: ^1.0.0
+```
 And import :
 
 ```dart
-import 'package:ip_address/ip_address.dart';
+import 'package:public_ip_address/public_ip_address.dart';
 ```
 
 ## Usage
@@ -42,7 +44,7 @@ import 'package:ip_address/ip_address.dart';
 _To get your ip address, just use `IpAddress.getIp()`:_
 
 ```dart
-import 'package:ip_address/ip_address.dart';
+import 'package:public_ip_address/public_ip_address.dart';
 
 void main() async {
   var ip = await IpAddress.getIp();
