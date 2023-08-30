@@ -1,14 +1,14 @@
-name: ip_address
-description: This packages allow you get your public IP Address and many others info about it.
+name: public_ip_address
+description: This package allows you to get your public IP Address and many others info about it.
 version: 1.0.0
-homepage: https://github.com/kagouda/ip_address
+homepage: https://github.com/devsumanrazz/IP-Address
 
 environment:
-  sdk: '>=2.16.0 <3.0.0'
+  sdk: '>=2.19.0 <4.0.0'
 
 
 dependencies:
-  http: 
+  http: ^1.1.0
 
 dev_dependencies:
   lints: ^1.0.0
