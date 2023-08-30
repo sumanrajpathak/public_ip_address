@@ -88,8 +88,8 @@ class IpAddress {
   ///  Use 4 for `IPV4` or 6 for `IPV6`
   static Future<String> getIp({Ip version = Ip.v4}) async {
     try {
-      return jsonDecode(jsonEncode((await http.get(
-              Uri.parse('https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org')))
+      return jsonDecode(jsonEncode((await http.get(Uri.parse(
+              'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org')))
           .body));
     } on Exception catch (e) {
       print(e);

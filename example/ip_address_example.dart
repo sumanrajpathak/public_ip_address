@@ -1,4 +1,4 @@
-import 'package:ip_address/ip_address.dart';
+import 'package:public_ip_address/public_ip_address.dart';
 
 void main() async {
   var ip = await IpAddress.getIp();
