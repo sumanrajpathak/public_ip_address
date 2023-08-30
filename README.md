@@ -53,7 +53,7 @@ void main() async {
 }
 ```
 
-_Don't forget to `await` it because it's a [Future function]('https://dart.dev/codelabs/async-await)._
+_Don't forget to `await` it because it's a [Future function](https://dart.dev/codelabs/async-await)._
 
 ## Others functionalities
 
