@@ -1,6 +1,6 @@
 [![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/http)
 [![package publisher](https://img.shields.io/pub/publisher/http.svg)](https://pub.dev/packages/http/publisher)
-# IP Address
+# Public IP Address
 
 
 This package allows you to obtain your public IP address and many other information about it
