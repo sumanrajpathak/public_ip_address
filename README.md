@@ -1,5 +1,5 @@
-[![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/http)
-[![package publisher](https://img.shields.io/pub/publisher/http.svg)](https://pub.dev/packages/http/publisher)
+[![pub package](https://img.shields.io/pub/v/public_ip_address.svg)](https://pub.dev/packages/public_ip_address)
+[![package publisher](https://img.shields.io/pub/publisher/public_ip_address.svg)](https://pub.dev/publishers/sumanrajpathak.com.np/packages)
 # Public IP Address
 
 
