@@ -1,6 +1,6 @@
 name: public_ip_address
 description: This package allows you to get your public IP Address and many others info about it.
-version: 1.1.0+1
+version: 1.1.0+2
 homepage: https://github.com/devsumanrazz/IP-Address
 
 environment:
