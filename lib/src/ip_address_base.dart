@@ -16,7 +16,7 @@ class IpAddress {
   static Future<String> _getSeeIp(String key) async {
     try {
       var _json = jsonDecode(
-              (await http.get(Uri.parse('https://ip.seeip.org/geoip/')))
+              (await http.get(Uri.parse('https://api.seeip.org/geoip/')))
                   .body)[key]
           .toString();
       if (_json == 'null') {
