@@ -1,6 +1,10 @@
-## 1.1.0
+## (1.1.0+2)
 
-- Update Example
+- Migrate API Endpoint
+
+## (1.1.0+1)
+
+- Update usage Example and Readme.md
 
 - ## 1.1.0
 
