@@ -131,12 +131,12 @@ class IpAddress {
 
   /// Return the Latitude of the visitor ip .
   static Future<double> getLatitude() async {
-    return double.parse('latitude');
+    return double.parse(await _getSeeIp('latitude'));
   }
 
   /// Return the Longitude of the visitor ip .
   static Future<double> getLongitude() async {
-    return double.parse('longitude');
+    return double.parse(await _getSeeIp('longitude'));
   }
 
   /// Return the TimeZone of the visitor ip .
@@ -146,12 +146,12 @@ class IpAddress {
 
   /// Return the UTC time offset of the visitor ip .
   static Future<int> getOffset() async {
-    return int.parse('offset');
+    return int.parse(await _getSeeIp('offset'));
   }
 
   /// Return the Asn of the visitor ip .
   static Future<int> getAsn() async {
-    return int.parse('asn');
+    return int.parse(await _getSeeIp('asn'));
   }
 
   /// Return the organization or Internet service provider (ASN + ISP name) of the visitor ip .
