@@ -1,3 +1,6 @@
+## (1.1.1)
+
+- Errors fixed in latitude,longitude,asn and offset
 ## (1.1.0+2)
 
 - Migrate API Endpoint
