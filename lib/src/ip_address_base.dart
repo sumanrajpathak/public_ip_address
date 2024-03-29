@@ -201,7 +201,7 @@ class IpAddress {
   static Future<Map<String, dynamic>> getAllDataFor(String ip) async {
     try {
       Map _json = jsonDecode(
-          (await http.get(Uri.parse('https://ip.seeip.org/geoip/$ip'))).body);
+          (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip'))).body);
       if (_json.containsKey('ip')) {
         return {
           'continentCode': _json['continent_code'],
@@ -237,7 +237,7 @@ class IpAddress {
   static Future<String> _getSeeIpFor(String key, {required String ip}) async {
     try {
       var _json = jsonDecode(
-              (await http.get(Uri.parse('https://ip.seeip.org/geoip/$ip')))
+              (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip')))
                   .body)[key]
           .toString();
       if (_json == 'null') {
