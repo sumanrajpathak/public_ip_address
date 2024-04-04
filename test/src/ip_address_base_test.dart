@@ -54,6 +54,21 @@ void main() {
       expect(city, isNotNull);
       expect(city, geoIpJson["city"]);
     });
+    
+    test("getContinentCode", () async {
+      when(() => repository.getContinentCode())
+          .thenAnswer((_) async => geoIpJson["continent_code"]);
+      String city = await repository.getContinentCode();
+      expect(city, isNotNull);
+      expect(city, geoIpJson["continent_code"]);
+    });
+    test("getContinentCodeFor", () async {
+      when(() => repository.getContinentCodeFor(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["continent_code"]);
+      String city = await repository.getContinentCodeFor(geoIpJson["ip"]);
+      expect(city, isNotNull);
+      expect(city, geoIpJson["continent_code"]);
+    });
     test("getSeeIp", () async {
       when(() => repository.getSeeIp("ip")).thenAnswer((_) async => testIP);
       String ip = await repository.getSeeIp("ip");
