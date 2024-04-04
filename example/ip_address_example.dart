@@ -1,10 +1,11 @@
 import 'package:public_ip_address/public_ip_address.dart';
 
 void main() async {
-  var ip = await IpAddress.getIp();
+  IpAddress _ipAddress = IpAddress();
+  var ip = await _ipAddress.getIp();
   print(ip);
   // Sample Output : 208.XX.XX.XX
-  var geoIP = await IpAddress.getAllData();
+  var geoIP = await _ipAddress.getAllData();
   print(geoIP);
   //Sample Output :
   // {ip: 202.XX.XX.XX, continentCode: AS, country: [COUNTRY NAME],
