@@ -1,54 +1,12 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:public_ip_address/src/ip_repository.dart';
 
 enum Ip { v4, v6 }
 
-/// Example:
-/// ```dart
-/// void main() async {
-///   String ip = await IpAddress.getIp();
-///   print(ip);
-///  // Output : 208.67.222.222
-/// }
-/// ```
-class IpAddress {
-  static Future<String> _getSeeIp(String key) async {
-    try {
-      var _json = jsonDecode(
-              (await http.get(Uri.parse('https://api.seeip.org/geoip/')))
-                  .body)[key]
-          .toString();
-      if (_json == 'null') {
-        return '$key not found';
-      } else {
-        return _json;
-      }
-    } on Exception catch (e) {
-      print(e);
-      return e.toString();
-    }
-  }
-
-  /// Return all data for  of the visitor ip address . The default Ip version is 4 .
-  ///
-  /// If the request is successful, the output will be a map containing :
-  /// - ip
-  /// - continentCode
-  /// - country
-  /// - countryCode
-  /// - countryCode3
-  /// - latitude
-  /// - longitude
-  /// - timeZone
-  /// - offset
-  /// - asn
-  /// - organization
-  ///
-  /// You can change also change the IP version to 6
-  ///  Use 4 for `IPV4` or 6 for `IPV6`
-
-  static Future<Map<String, dynamic>> getAllData({Ip version = Ip.v4}) async {
+class IpAddress extends IpRepository {
+  @override
+  Future<Map<String, dynamic>> getAllData({Ip version = Ip.v4}) async {
     try {
       Map<String, dynamic> _json = jsonDecode((await http.get(Uri.parse(
               'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org/geoip')))
@@ -72,7 +30,6 @@ class IpAddress {
         if (_json['postal_code'] != null) 'postal_code': _json['postal_code'],
       };
     } on Exception catch (e) {
-      print(e);
       if (e.toString().contains('SocketException')) {
         return {'error': 'Internet Error'};
       } else {
@@ -81,124 +38,8 @@ class IpAddress {
     }
   }
 
-  /// Return the visitor Ip address value. The default Ip version is 4 .
-  ///
-  /// You can change also change the IP version to 6
-  ///
-  ///  Use 4 for `IPV4` or 6 for `IPV6`
-  static Future<String> getIp({Ip version = Ip.v4}) async {
-    try {
-      return jsonDecode(jsonEncode((await http.get(Uri.parse(
-              'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org')))
-          .body));
-    } on Exception catch (e) {
-      print(e);
-      return e.toString();
-    }
-  }
-
-  /// Return the `Ipv4` (Ip version 4) address value of the visitor ip .
-  ///
-  static Future<String> getIpv4() async {
-    return getIp(version: Ip.v4);
-  }
-
-  /// Return the `Ipv6` (Ip version 6) address value of the visitor  .
-  ///
-  static Future<String> getIpv6() async {
-    return getIp(version: Ip.v4);
-  }
-
-  /// Return the Continent Code of the visitor ip .
-  static Future<String> getContinentCode() async {
-    return _getSeeIp('continent_code');
-  }
-
-  /// Return the Name of the country of the visitor ip .
-  static Future<String> getCountry() async {
-    return _getSeeIp('country');
-  }
-
-  /// Return the Two-letter ISO 3166-1 alpha-2 country code .
-  static Future<String> getCountryCode() async {
-    return _getSeeIp('country_code');
-  }
-
-  /// Return the Three-letter ISO 3166-1 alpha-3 country code
-  static Future<String> getCountryCode3() async {
-    return _getSeeIp('country_code3');
-  }
-
-  /// Return the Latitude of the visitor ip .
-  static Future<double> getLatitude() async {
-    return double.parse(await _getSeeIp('latitude'));
-  }
-
-  /// Return the Longitude of the visitor ip .
-  static Future<double> getLongitude() async {
-    return double.parse(await _getSeeIp('longitude'));
-  }
-
-  /// Return the TimeZone of the visitor ip .
-  static Future<String> getTimeZone() async {
-    return _getSeeIp('timezone');
-  }
-
-  /// Return the UTC time offset of the visitor ip .
-  static Future<int> getOffset() async {
-    return int.parse(await _getSeeIp('offset'));
-  }
-
-  /// Return the Asn of the visitor ip .
-  static Future<int> getAsn() async {
-    return int.parse(await _getSeeIp('asn'));
-  }
-
-  /// Return the organization or Internet service provider (ASN + ISP name) of the visitor ip .
-  /// Usage :
-  ///  ```dart
-  /// int organization = await IpAddress.getOrganization();
-  /// // Sample Output : "AS36692 OpenDNS, LLC"
-  /// ```
-  static Future<String> getOrganization() async {
-    return _getSeeIp('organization');
-  }
-
-  /// If there is a Region associated with your ip address, it will the name
-  static Future<String> getRegion() async {
-    return _getSeeIp('region');
-  }
-
-  /// If there is a Region Code associated with your ip address, it will be returned .
-  static Future<String> getRegionCode() async {
-    return _getSeeIp('region_code');
-  }
-
-  /// If there is a City associated with your ip address, it will the name .
-  static Future<String> getCity() async {
-    return _getSeeIp('city');
-  }
-
-  /// If there is a Postal code/Zip code associated with your ip address, it will be returned .
-  static Future<String> getPostalCode() async {
-    return _getSeeIp('postal_code');
-  }
-
-//------------------------------------------------------------------------------     For Ip
-  /// Return all data for a specific ip address
-  /// If the request is successful, the output will be a map containing :
-  /// - continentCode
-  /// - country
-  /// - countryCode
-  /// - countryCode3
-  /// - latitude
-  /// - longitude
-  /// - timeZone
-  /// - offset
-  /// - asn
-  /// - organization
-  ///
-  static Future<Map<String, dynamic>> getAllDataFor(String ip) async {
+  @override
+  Future<Map<String, dynamic>> getAllDataFor(String ip) async {
     try {
       Map _json = jsonDecode(
           (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip'))).body);
@@ -224,7 +65,6 @@ class IpAddress {
         return {'error': 'IP address is not a valid '};
       }
     } catch (e) {
-      print(e);
       if (e.toString().contains('SocketException')) {
         return {'error': 'Internet Error'};
       } else {
@@ -233,8 +73,176 @@ class IpAddress {
     }
   }
 
-  //----------seeIpFor
-  static Future<String> _getSeeIpFor(String key, {required String ip}) async {
+  @override
+  Future<int> getAsn() async {
+    return int.parse(await getSeeIp('asn'));
+  }
+
+  @override
+  Future<int> getAsnFor(String ip) async {
+    return int.parse(await getSeeIpFor(key: 'asn', ip: ip));
+  }
+
+  @override
+  Future<String> getCity() async {
+    return getSeeIp('city');
+  }
+
+  @override
+  Future<String> getCityFor(String ip) {
+    return getSeeIpFor(key: 'city', ip: ip);
+  }
+
+  @override
+  Future<String> getContinentCode() async {
+    return getSeeIp('continent_code');
+  }
+
+  @override
+  Future<String> getContinentCodeFor(String ip) {
+    return getSeeIpFor(key: 'continent_code', ip: ip);
+  }
+
+  @override
+  Future<String> getCountry() {
+    return getSeeIp('country');
+  }
+
+  @override
+  Future<String> getCountryCode() {
+    return getSeeIp('country_code');
+  }
+
+  @override
+  Future<String> getCountryCode3() {
+    return getSeeIp('country_code3');
+  }
+
+  @override
+  Future<String> getCountryCode3For(String ip) {
+    return getSeeIpFor(key: 'country_code3', ip: ip);
+  }
+
+  @override
+  Future<String> getCountryCodeFor(String ip) {
+    return getSeeIpFor(key: 'country_code', ip: ip);
+  }
+
+  @override
+  Future<String> getCountryFor(String ip) {
+    return getSeeIpFor(key: 'country', ip: ip);
+  }
+
+  @override
+  Future<String> getIp({Ip version = Ip.v4}) async {
+    try {
+      return jsonDecode(jsonEncode((await http.get(Uri.parse(
+              'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org')))
+          .body));
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  @override
+  Future<String> getIpv4() {
+    return getIp(version: Ip.v4);
+  }
+
+  @override
+  Future<String> getIpv6() {
+    return getIp(version: Ip.v6);
+  }
+
+  @override
+  Future<double> getLatitude() async {
+    return double.parse(await getSeeIp('latitude'));
+  }
+
+  @override
+  Future<double> getLatitudeFor(String ip) async {
+    return double.parse(await getSeeIpFor(key: 'latitude', ip: ip));
+  }
+
+  @override
+  Future<double> getLongitude() async {
+    return double.parse(await getSeeIp('longitude'));
+  }
+
+  @override
+  Future<double> getLongitudeFor(String ip) async {
+    return double.parse(await getSeeIpFor(key: 'longitude', ip: ip));
+  }
+
+  @override
+  Future<int> getOffset() async {
+    return int.parse(await getSeeIp('offset'));
+  }
+
+  @override
+  Future<int> getOffsetFor(String ip) async {
+    return int.parse(await getSeeIpFor(key: 'offset', ip: ip));
+  }
+
+  @override
+  Future<String> getOrganization() {
+    return getSeeIp('organization');
+  }
+
+  @override
+  Future<String> getOrganizationFor(String ip) {
+    return getSeeIpFor(key: 'organization', ip: ip);
+  }
+
+  @override
+  Future<String> getPostalCode() {
+    return getSeeIp('postal_code');
+  }
+
+  @override
+  Future<String> getPostalCodeFor(String ip) {
+    return getSeeIpFor(key: 'postal_code', ip: ip);
+  }
+
+  @override
+  Future<String> getRegion() {
+    return getSeeIp('region');
+  }
+
+  @override
+  Future<String> getRegionCode() {
+    return getSeeIp('region_code');
+  }
+
+  @override
+  Future<String> getRegionCodeFor(String ip) {
+    return getSeeIpFor(key: 'region_code', ip: ip);
+  }
+
+  @override
+  Future<String> getRegionFor(String ip) {
+    return getSeeIpFor(key: 'region', ip: ip);
+  }
+
+  @override
+  Future<String> getSeeIp(String key) async {
+    try {
+      var _json = jsonDecode(
+              (await http.get(Uri.parse('https://api.seeip.org/geoip/')))
+                  .body)[key]
+          .toString();
+      if (_json == 'null') {
+        return '$key not found';
+      } else {
+        return _json;
+      }
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  @override
+  Future<String> getSeeIpFor({required String key, required String ip}) async {
     try {
       var _json = jsonDecode(
               (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip')))
@@ -246,78 +254,17 @@ class IpAddress {
         return _json;
       }
     } on Exception catch (e) {
-      print(e);
       return e.toString();
     }
   }
 
-  /// Return the continent code for a specific ip address .
-  static Future<String> getContinentCodeFor(String ip) async {
-    return _getSeeIpFor('continent_code', ip: ip);
+  @override
+  Future<String> getTimeZone() {
+    return getSeeIp('timezone');
   }
 
-  /// Return the country for a specific ip address .
-  static Future<String> getCountryFor(String ip) async {
-    return _getSeeIpFor('country', ip: ip);
-  }
-
-  /// Return the country code for a specific ip address .
-  static Future<String> getCountryCodeFor(String ip) async {
-    return _getSeeIpFor('country_code', ip: ip);
-  }
-
-  /// Return the country code for a specific ip address .
-  static Future<String> getCountryCode3For(String ip) async {
-    return _getSeeIpFor('country_code3', ip: ip);
-  }
-
-  /// Return the latitude for a specific ip address .
-  static Future<double> getLatitudeFor(String ip) async {
-    return double.parse(await _getSeeIpFor('latitude', ip: ip));
-  }
-
-  /// Return the longitude for a specific ip address .
-  static Future<double> getLongitudeFor(String ip) async {
-    return double.parse(await _getSeeIpFor('longitude', ip: ip));
-  }
-
-  /// Return the timeZone for a specific ip address .
-  static Future<String> getTimeZoneFor(String ip) async {
-    return _getSeeIpFor('timezone', ip: ip);
-  }
-
-  /// Return the offset for a specific ip address .
-  static Future<int> getOffsetFor(String ip) async {
-    return int.parse(await _getSeeIpFor('offset', ip: ip));
-  }
-
-  /// Return the asn for a specific ip address .
-  static Future<int> getAsnFor(String ip) async {
-    return int.parse(await _getSeeIpFor('asn', ip: ip));
-  }
-
-  /// Return the internet organization for a specific ip address .
-  static Future<String> getOrganizationFor(String ip) async {
-    return _getSeeIpFor('organization', ip: ip);
-  }
-
-  /// If there is a Region associated with your ip address, it will the name .
-  static Future<String> getRegionFor(String ip) async {
-    return _getSeeIpFor('region', ip: ip);
-  }
-
-  /// If there is a Region Code associated with your ip address, it will be returned
-  static Future<String> getRegionCodeFor(String ip) async {
-    return _getSeeIpFor('region_code', ip: ip);
-  }
-
-  /// If there is a City associated with your ip address, it will the name .
-  static Future<String> getCityFor(String ip) async {
-    return _getSeeIpFor('city', ip: ip);
-  }
-
-  /// If there is a Postal code/Zip code associated with your ip address, it will be returned
-  static Future<String> getPostalCodeFor(String ip) async {
-    return _getSeeIpFor('postal_code', ip: ip);
+  @override
+  Future<String> getTimeZoneFor(String ip) {
+    return getSeeIpFor(key: 'timezone', ip: ip);
   }
 }
