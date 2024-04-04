@@ -31,7 +31,7 @@ Add this to your dependencies :
 ```yaml
 dependencies:
 
-  public_ip_address: ^1.0.0
+  public_ip_address: ^1.2.0
 ```
 And import :
 
@@ -41,13 +41,14 @@ import 'package:public_ip_address/public_ip_address.dart';
 
 ## Usage
 
-_To get your ip address, just use `IpAddress.getIp()`:_
+_To get your ip address, just use `IpAddress().getIp()`:_
 
 ```dart
 import 'package:public_ip_address/public_ip_address.dart';
 
 void main() async {
-  var ip = await IpAddress.getIp();
+  IpAddress _ipAddress = IpAddress();
+  var ip = await _ipAddress.getIp();
   print(ip);
   // Sample Output : 208.67.222.222
 }
@@ -60,80 +61,80 @@ _Don't forget to `await` it because it's a [Future function](https://dart.dev/co
 - To get all data about the user's IP address , use `getAllData()` :
 
 ```dart
-Map allData = await IpAddress.getAllData();
+Map allData = await IpAddress().getAllData();
 ```
 
 _For a specific ip , use `getAllDataFor('specific_ip')` method instead ._
 
 - To get only the user's IP address, use :
-  `IpAddress.getIp()`:
+  `IpAddress().getIp()`:
 
 ```dart
-String ip = await IpAddress.getIp();
+String ip = await IpAddress().getIp();
 // Sample Output : "208.67.222.222"
 ```
 
 - To get the `Ipv4` (Ip version 4) address value of the user's IP , use :
-  `IpAddress.getIpv4()`:
+  `IpAddress().getIpv4()`:
 
 ```dart
-String ipv4 = await IpAddress.getIpv4();
+String ipv4 = await IpAddress().getIpv4();
 // Sample Output : "208.67.222.222"
 ```
 
 - To get the `Ipv6` (Ip version 6) address value of the user's IP , use :
-  `IpAddress.getIpv6()`:
+  `IpAddress().getIpv6()`:
 
 ```dart
-String ipv6 = await IpAddress.getIpv6();
+String ipv6 = await IpAddress().getIpv6();
 // Sample Output : "2a05:dfc7:5::53"
 ```
 
 - To get the Continent Code of the user's IP , use :
-  `IpAddress.getContinentCode()`:
+  `IpAddress().getContinentCode()`:
 
 ```dart
-String continentCode = await IpAddress.getContinentCode();
+String continentCode = await IpAddress().getContinentCode();
 // Sample Output : "NA"
 ```
 
 _For a specific ip , use `getContinentCodeFor('specific_ip')` method instead ._
 
 - To get the Country of the user's IP , use :
-  `IpAddress.getCountry()`:
+  `IpAddress().getCountry()`:
 
 ```dart
-String country = await IpAddress.getCountry();
+String country = await IpAddress().getCountry();
 // Sample Output : "United States"
 ```
 
 _For a specific ip , use `getCountryFor('specific_ip')` method instead ._
 
 - To get the Two-letter ISO 3166-1 alpha-2 country code of the user's IP , use :
-  `IpAddress.getCountryCode()`:
+  `IpAddress().getCountryCode()`:
 
 ```dart
-String countryCode = await IpAddress.getCountryCode();
+String countryCode = await IpAddress().getCountryCode();
 // Sample Output : "US"
 ```
 
 _For a specific ip , use `getCountryCodeFor('specific_ip')` method instead ._
 
 - To get the Three-letter ISO 3166-1 alpha-3 country code of the user's IP , use :
-  `IpAddress.getCountryCode3()`:
+  `IpAddress().getCountryCode3()`:
 
 ```dart
-String countryCode3 = await IpAddress.getCountryCode3();
+String countryCode3 = await IpAddress().getCountryCode3();
 // Sample Output : "USA"
 ```
 
 _For a specific ip , use `getCountryCode3For('specific_ip')` method instead ._
 
 - To get the Latitude of the user's IP , use :
-  `IpAddress.getLatitude()`:
+  `IpAddress().getLatitude()`:
 
 ```dart
-double latitude = await IpAddress.getLatitude();
+double latitude = await IpAddress().getLatitude();
 // Sample Output : 37.7697
 ```
 
@@ -143,77 +144,77 @@ _For a specific ip , use `getLatitudeFor('specific_ip')` method instead ._
   `IpAddress.getLongitude()`:
 
 ```dart
-double longitude = await IpAddress.getLongitude();
+double longitude = await IpAddress().getLongitude();
 // Sample Output : -122.3933
 ```
 
 _For a specific ip , use `getLongitudeFor('specific_ip')` method instead ._
 
 - To get the TimeZone of the user's IP , use :
-  `IpAddress.getTimeZone()`:
+  `IpAddress().getTimeZone()`:
 
 ```dart
-String timeZone = await IpAddress.getTimeZone();
+String timeZone = await IpAddress().getTimeZone();
 // Sample Output : "America\/Los_Angeles"
 ```
 
 _For a specific ip , use `getTimeZoneFor('specific_ip')` method instead ._
 
 - To get the UTC time offset of the user's IP , use :
-  `IpAddress.getOffset()`:
+  `IpAddress().getOffset()`:
 
 ```dart
-int offset = await IpAddress.getOffset();
+int offset = await IpAddress().getOffset();
 // Sample Output : -7
 ```
 
 _For a specific ip , use `getOffsetFor('specific_ip')` method instead ._
 
 - To get the organization or Internet service provider (ASN + ISP name) of the user's IP , use :
-  `IpAddress.getOrganization()`:
+  `IpAddress().getOrganization()`:
 
 ```dart
-int organization = await IpAddress.getOrganization();
+int organization = await IpAddress().getOrganization();
 // Sample Output : "AS36692 OpenDNS, LLC"
 ```
 
 _For a specific ip , use `getOrganizationFor('specific_ip')` method instead ._
 
 - To get the Name of the Region of the user's IP , use :
-  `IpAddress.getRegion()`:
+  `IpAddress().getRegion()`:
 
 ```dart
-String region = await IpAddress.getRegion();
+String region = await IpAddress().getRegion();
 // Sample Output : "New York"
 ```
 
 _For a specific ip , use `getRegionFor('specific_ip')` method instead ._
 
 - To get the Region Code of the user's IP , use :
-  `IpAddress.getRegionCode()`:
+  `IpAddress().getRegionCode()`:
 
 ```dart
-String regionCode = await IpAddress.getRegionCode();
+String regionCode = await IpAddress().getRegionCode();
 // Sample Output : "NY"
 ```
 
 _For a specific ip , use `getRegionCodeFor('specific_ip')` method instead ._
 
 - To get the Name of the city of the user's IP , use :
-  `IpAddress.getCity()`:
+  `IpAddress().getCity()`:
 
 ```dart
-String city = await IpAddress.getcity();
+String city = await IpAddress().getcity();
 // Sample Output : "Brooklyn"
 ```
 
 _For a specific ip , use `getCityFor('specific_ip')` method instead ._
 
 - To get the Postal code/Zip code of the user's IP , use :
-  `IpAddress.getPostalCode()`:
+  `IpAddress().getPostalCode()`:
 
 ```dart
-String postalCode = await IpAddress.getPostalCode();
+String postalCode = await IpAddress().getPostalCode();
 // Sample Output : "11213"
 ```
 
