@@ -1,7 +1,8 @@
-[![pub package](https://img.shields.io/pub/v/public_ip_address.svg)](https://pub.dev/packages/public_ip_address)
-[![package publisher](https://img.shields.io/pub/publisher/public_ip_address.svg)](https://pub.dev/publishers/sumanrajpathak.com.np/packages)
 # Public IP Address
 
+[![pub package](https://img.shields.io/pub/v/public_ip_address.svg)](https://pub.dev/packages/public_ip_address)
+
+[![package publisher](https://img.shields.io/pub/publisher/public_ip_address.svg)](https://pub.dev/publishers/sumanrajpathak.com.np/packages)\
 
 This package allows you to obtain your public IP address and many other information about it
 
@@ -33,6 +34,7 @@ dependencies:
 
   public_ip_address: ^1.2.0
 ```
+
 And import :
 
 ```dart
