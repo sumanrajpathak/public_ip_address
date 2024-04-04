@@ -1,4 +1,4 @@
-## Usage
+# Usage
 
 _To get your ip address, just use `IpAddress.getIp()`:_
 
@@ -6,10 +6,10 @@ _To get your ip address, just use `IpAddress.getIp()`:_
 import 'package:public_ip_address/public_ip_address.dart';
 
 void main() async {
-  var ip = await IpAddress.getIp();
+  var ip = await IpAddress().getIp();
   print(ip);
   // Sample Output : 208.XX.XX.XX
-  var allIP = await IpAddress.getAllData();
+  var allIP = await IpAddress().getAllData();
   print(allIP);
   //Sample Output :
   // {ip: 202.XX.XX.XX, continentCode: AS, country: [COUNTRY NAME], 
@@ -19,4 +19,4 @@ void main() async {
 }
 ```
 
-_Don't forget to `await` it because it's a [Future function]('https://dart.dev/codelabs/async-await)._
+_Don't forget to `await` it because it's a [Future function]('https://dart.dev/codelabs/async-await)
