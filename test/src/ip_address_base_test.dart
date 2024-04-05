@@ -58,17 +58,32 @@ void main() {
     test("getContinentCode", () async {
       when(() => repository.getContinentCode())
           .thenAnswer((_) async => geoIpJson["continent_code"]);
-      String city = await repository.getContinentCode();
-      expect(city, isNotNull);
-      expect(city, geoIpJson["continent_code"]);
+      String continentCode = await repository.getContinentCode();
+      expect(continentCode, isNotNull);
+      expect(continentCode, geoIpJson["continent_code"]);
     });
     test("getContinentCodeFor", () async {
       when(() => repository.getContinentCodeFor(geoIpJson["ip"]))
           .thenAnswer((_) async => geoIpJson["continent_code"]);
-      String city = await repository.getContinentCodeFor(geoIpJson["ip"]);
-      expect(city, isNotNull);
-      expect(city, geoIpJson["continent_code"]);
+      String continentCode = await repository.getContinentCodeFor(geoIpJson["ip"]);
+      expect(continentCode, isNotNull);
+      expect(continentCode, geoIpJson["continent_code"]);
     });
+    test("getCountry", () async {
+      when(() => repository.getCountry())
+          .thenAnswer((_) async => geoIpJson["country"]);
+      String country = await repository.getCountry();
+      expect(country, isNotNull);
+      expect(country, geoIpJson["country"]);
+    });
+    test("getCountryCode", () async {
+      when(() => repository.getCountryCode(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["country_code"]);
+      String countryCode = await repository.getCountryCode(geoIpJson["ip"]);
+      expect(countryCode, isNotNull);
+      expect(countryCode, geoIpJson["country_code"]);
+    });
+    
     test("getSeeIp", () async {
       when(() => repository.getSeeIp("ip")).thenAnswer((_) async => testIP);
       String ip = await repository.getSeeIp("ip");
