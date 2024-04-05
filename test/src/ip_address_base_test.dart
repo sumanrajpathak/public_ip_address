@@ -54,7 +54,7 @@ void main() {
       expect(city, isNotNull);
       expect(city, geoIpJson["city"]);
     });
-    
+
     test("getContinentCode", () async {
       when(() => repository.getContinentCode())
           .thenAnswer((_) async => geoIpJson["continent_code"]);
