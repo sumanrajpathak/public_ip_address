@@ -97,6 +97,20 @@ void main() {
       expect(countryCode3, isNotNull);
       expect(countryCode3, geoIpJson["country_code3"]);
     });
+    test("getCountryCodeFor", () async {
+      when(() => repository.getCountryCodeFor(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["country_code"]);
+      String countryCode = await repository.getCountryCodeFor(geoIpJson["ip"]);
+      expect(countryCode, isNotNull);
+      expect(countryCode, geoIpJson["country_code"]);
+    });
+    test("getCountryFor", () async {
+      when(() => repository.getCountryFor(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["country"]);
+      String country = await repository.getCountryFor(geoIpJson["ip"]);
+      expect(country, isNotNull);
+      expect(country, geoIpJson["country"]);
+    });
     
     test("getSeeIp", () async {
       when(() => repository.getSeeIp("ip")).thenAnswer((_) async => testIP);
