@@ -166,5 +166,12 @@ void main() {
       expect(longitude, isNotNull);
       expect(longitude, geoIpJson["longitude"]);
     });
+    test("getOffset", () async {
+      when(() => repository.getOffset())
+          .thenAnswer((_) async => geoIpJson["offset"]);
+      int offset = await repository.getOffset();
+      expect(offset, isNotNull);
+      expect(offset, geoIpJson["offset"]);
+    });
   });
 }
