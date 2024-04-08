@@ -138,5 +138,33 @@ void main() {
       expect(ip, isNotNull);
       expect(ip, testIPV6);
     });
+    test("getLatitude", () async {
+      when(() => repository.getLatitude())
+          .thenAnswer((_) async => geoIpJson["latitude"]);
+      double latitude = await repository.getLatitude();
+      expect(latitude, isNotNull);
+      expect(latitude, geoIpJson["latitude"]);
+    });
+    test("getLatitudeFor", () async {
+      when(() => repository.getLatitudeFor(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["latitude"]);
+      double latitude = await repository.getLatitudeFor(geoIpJson["ip"]);
+      expect(latitude, isNotNull);
+      expect(latitude, geoIpJson["latitude"]);
+    });
+    test("getLongitude", () async {
+      when(() => repository.getLatitude())
+          .thenAnswer((_) async => geoIpJson["longitude"]);
+      double longitude = await repository.getLongitude();
+      expect(longitude, isNotNull);
+      expect(longitude, geoIpJson["longitude"]);
+    });
+    test("getLongitudeFor", () async {
+      when(() => repository.getLongitudeFor(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["longitude"]);
+      double longitude = await repository.getLongitudeFor(geoIpJson["ip"]);
+      expect(longitude, isNotNull);
+      expect(longitude, geoIpJson["longitude"]);
+    });
   });
 }
