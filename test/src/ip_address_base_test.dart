@@ -77,11 +77,25 @@ void main() {
       expect(country, geoIpJson["country"]);
     });
     test("getCountryCode", () async {
-      when(() => repository.getCountryCode(geoIpJson["ip"]))
+      when(() => repository.getCountryCode())
           .thenAnswer((_) async => geoIpJson["country_code"]);
-      String countryCode = await repository.getCountryCode(geoIpJson["ip"]);
+      String countryCode = await repository.getCountryCode();
       expect(countryCode, isNotNull);
       expect(countryCode, geoIpJson["country_code"]);
+    });
+    test("getCountryCode3", () async {
+      when(() => repository.getCountryCode3())
+          .thenAnswer((_) async => geoIpJson["country_code3"]);
+      String countryCode3 = await repository.getCountryCode3();
+      expect(countryCode3, isNotNull);
+      expect(countryCode3, geoIpJson["country_code3"]);
+    });
+    test("getCountryCode3For", () async {
+      when(() => repository.getCountryCode3For(geoIpJson["ip"]))
+          .thenAnswer((_) async => geoIpJson["country_code3"]);
+      String countryCode3 = await repository.getCountryCode3For(geoIpJson["ip"]);
+      expect(countryCode3, isNotNull);
+      expect(countryCode3, geoIpJson["country_code3"]);
     });
     
     test("getSeeIp", () async {
