@@ -1,4 +1,8 @@
-# (1.2.0)
+# (1.2.1)
+
+- Added City in response
+
+## (1.2.0)
 
 ## Breaking Changes
 
