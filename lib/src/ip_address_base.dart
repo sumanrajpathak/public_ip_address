@@ -39,7 +39,7 @@ class IpAddress extends IpRepository {
           'organization': _json['organization'],
         if (_json['region'] != null) 'region': _json['region'],
         if (_json['region_code'] != null) 'regionCode': _json['region_code'],
-        if (_json['city'] != null) 'region': _json['region'],
+        if (_json['city'] != null) 'city': _json['city'],
         if (_json['postal_code'] != null) 'postal_code': _json['postal_code'],
       };
     } on Exception catch (e) {
@@ -94,7 +94,7 @@ class IpAddress extends IpRepository {
             'organization': _json['organization'],
           if (_json['region'] != null) 'region': _json['region'],
           if (_json['region_code'] != null) 'regionCode': _json['region_code'],
-          if (_json['city'] != null) 'region': _json['region'],
+          if (_json['city'] != null) 'city': _json['city'],
           if (_json['postal_code'] != null) 'postal_code': _json['postal_code'],
         };
       } else {
