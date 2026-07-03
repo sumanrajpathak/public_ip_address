@@ -155,7 +155,7 @@ void main() {
       expect(latitude, geoIpJson["latitude"]);
     });
     test("getLongitude", () async {
-      when(() => repository.getLatitude())
+      when(() => repository.getLongitude())
           .thenAnswer((_) async => geoIpJson["longitude"]);
       double longitude = await repository.getLongitude();
       expect(longitude, isNotNull);
