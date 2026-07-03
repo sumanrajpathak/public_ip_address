@@ -1,16 +1,22 @@
 name: public_ip_address
 description: This package allows you to get your public IP Address and many others info about it.
-version: 1.2.1
-homepage: https://github.com/devsumanrazz/IP-Address
+version: 1.2.2
+homepage: https://github.com/sumanrajpathak/public_ip_address
+repository: https://github.com/sumanrajpathak/public_ip_address
+issue_tracker: https://github.com/sumanrajpathak/public_ip_address/issues
+topics:
+  - ip
+  - network
+  - geolocation
+  - ip-address
 
 environment:
   sdk: '>=2.19.0 <4.0.0'
-
 
 dependencies:
   http: ^1.1.0
 
 dev_dependencies:
-  lints: ^1.0.0
+  lints: ^4.0.0
   test: ^1.16.0
   mocktail: ^1.0.3

@@ -1,4 +1,10 @@
-# (1.2.1)
+# (1.2.2)
+
+- Fixed doc comments flagged by pub.dev static analysis (angle brackets in dartdoc)
+- Updated repository links and added topics in pubspec.yaml
+- Updated lints to ^4.0.0 and fixed the getLongitude test
+
+## (1.2.1)
 
 - Added City in response
 

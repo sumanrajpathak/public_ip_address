@@ -32,7 +32,7 @@ Add this to your dependencies :
 ```yaml
 dependencies:
 
-  public_ip_address: ^1.2.0
+  public_ip_address: ^1.2.2
 ```
 
 And import :
@@ -176,7 +176,7 @@ _For a specific ip , use `getOffsetFor('specific_ip')` method instead ._
   `IpAddress().getOrganization()`:
 
 ```dart
-int organization = await IpAddress().getOrganization();
+String organization = await IpAddress().getOrganization();
 // Sample Output : "AS36692 OpenDNS, LLC"
 ```
 
@@ -206,7 +206,7 @@ _For a specific ip , use `getRegionCodeFor('specific_ip')` method instead ._
   `IpAddress().getCity()`:
 
 ```dart
-String city = await IpAddress().getcity();
+String city = await IpAddress().getCity();
 // Sample Output : "Brooklyn"
 ```
 
