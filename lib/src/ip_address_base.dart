@@ -7,7 +7,7 @@ enum Ip { v4, v6 }
 class IpAddress extends IpRepository {
   /// Gets all data for the current device's public IP Address.
   ///
-  /// Returns a [Map<String, dynamic>] with all data from the API or an
+  /// Returns a `Map<String, dynamic>` with all data from the API or an
   /// error [Map] if there was an error.
   ///
   /// The [version] parameter specifies the IP version to be used,
@@ -17,7 +17,7 @@ class IpAddress extends IpRepository {
   @override
   Future<Map<String, dynamic>> getAllData({Ip version = Ip.v4}) async {
     try {
-      final Map<String, dynamic> _json = jsonDecode((await http.get(
+      final Map<String, dynamic> json = jsonDecode((await http.get(
         Uri.parse(
           'https://ip${version == Ip.v4 ? 'v4' : 'v6'}.seeip.org/geoip',
         ),
@@ -25,22 +25,21 @@ class IpAddress extends IpRepository {
           .body);
 
       return {
-        'ip': _json['ip'],
-        'continentCode': _json['continent_code'],
-        'country': _json['country'],
-        'countryCode': _json['country_code'],
-        'countryCode3': _json['country_code3'],
-        'latitude': _json['latitude'],
-        'longitude': _json['longitude'],
-        'timeZone': _json['timezone'],
-        'offset': _json['offset'],
-        'asn': _json['asn'],
-        if (_json['organization'] != null)
-          'organization': _json['organization'],
-        if (_json['region'] != null) 'region': _json['region'],
-        if (_json['region_code'] != null) 'regionCode': _json['region_code'],
-        if (_json['city'] != null) 'city': _json['city'],
-        if (_json['postal_code'] != null) 'postal_code': _json['postal_code'],
+        'ip': json['ip'],
+        'continentCode': json['continent_code'],
+        'country': json['country'],
+        'countryCode': json['country_code'],
+        'countryCode3': json['country_code3'],
+        'latitude': json['latitude'],
+        'longitude': json['longitude'],
+        'timeZone': json['timezone'],
+        'offset': json['offset'],
+        'asn': json['asn'],
+        if (json['organization'] != null) 'organization': json['organization'],
+        if (json['region'] != null) 'region': json['region'],
+        if (json['region_code'] != null) 'regionCode': json['region_code'],
+        if (json['city'] != null) 'city': json['city'],
+        if (json['postal_code'] != null) 'postal_code': json['postal_code'],
       };
     } on Exception catch (e) {
       if (e.toString().contains('SocketException')) {
@@ -77,25 +76,25 @@ class IpAddress extends IpRepository {
   @override
   Future<Map<String, dynamic>> getAllDataFor(String ip) async {
     try {
-      Map _json = jsonDecode(
+      Map json = jsonDecode(
           (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip'))).body);
-      if (_json.containsKey('ip')) {
+      if (json.containsKey('ip')) {
         return {
-          'continentCode': _json['continent_code'],
-          'country': _json['country'],
-          'countryCode': _json['country_code'],
-          'countryCode3': _json['country_code3'],
-          'latitude': _json['latitude'],
-          'longitude': _json['longitude'],
-          'timeZone': _json['timezone'],
-          'offset': _json['offset'],
-          'asn': _json['asn'],
-          if (_json['organization'] != null)
-            'organization': _json['organization'],
-          if (_json['region'] != null) 'region': _json['region'],
-          if (_json['region_code'] != null) 'regionCode': _json['region_code'],
-          if (_json['city'] != null) 'city': _json['city'],
-          if (_json['postal_code'] != null) 'postal_code': _json['postal_code'],
+          'continentCode': json['continent_code'],
+          'country': json['country'],
+          'countryCode': json['country_code'],
+          'countryCode3': json['country_code3'],
+          'latitude': json['latitude'],
+          'longitude': json['longitude'],
+          'timeZone': json['timezone'],
+          'offset': json['offset'],
+          'asn': json['asn'],
+          if (json['organization'] != null)
+            'organization': json['organization'],
+          if (json['region'] != null) 'region': json['region'],
+          if (json['region_code'] != null) 'regionCode': json['region_code'],
+          if (json['city'] != null) 'city': json['city'],
+          if (json['postal_code'] != null) 'postal_code': json['postal_code'],
         };
       } else {
         return {'error': 'IP address is not a valid '};
@@ -120,7 +119,7 @@ class IpAddress extends IpRepository {
   /// Parameters:
   ///   ip (String): The IP address for which to retrieve the ASN.
   ///
-  /// Returns: Future<int>: A Future that resolves to the ASN as an integer.
+  /// Returns: `Future<int>`: A Future that resolves to the ASN as an integer.
   @override
   Future<int> getAsnFor(String ip) async {
     return int.parse(await getSeeIpFor(key: 'asn', ip: ip));
@@ -137,7 +136,7 @@ class IpAddress extends IpRepository {
   /// Parameters:
   ///   ip - A String representing the IP address for which the city information is requested.
   ///
-  /// Returns: A [Future<String>] containing the city information associated with the provided IP address.
+  /// Returns: A `Future<String>` containing the city information associated with the provided IP address.
   @override
   Future<String> getCityFor(String ip) {
     return getSeeIpFor(key: 'city', ip: ip);
@@ -155,7 +154,7 @@ class IpAddress extends IpRepository {
     return getSeeIpFor(key: 'continent_code', ip: ip);
   }
 
-  /// Retrieves the country information using the getSeeIp function and returns it as a Future<String>.
+  /// Retrieves the country information using the getSeeIp function and returns it as a `Future<String>`.
   @override
   Future<String> getCountry() {
     return getSeeIp('country');
@@ -197,7 +196,7 @@ class IpAddress extends IpRepository {
 
   /// A function that retrieves the IP address from 'https://ip{version}.seeip.org' using HTTP GET request.
   /// It takes an optional parameter 'version' of type 'Ip' which defaults to 'Ip.v4'.
-  /// Returns a Future<String> containing the retrieved IP address or an error message.
+  /// Returns a `Future<String>` containing the retrieved IP address or an error message.
   Future<String> getIp({Ip version = Ip.v4}) async {
     try {
       return jsonDecode(jsonEncode((await http.get(Uri.parse(
@@ -312,14 +311,14 @@ class IpAddress extends IpRepository {
   @override
   Future<String> getSeeIp(String key) async {
     try {
-      var _json = jsonDecode(
+      var json = jsonDecode(
               (await http.get(Uri.parse('https://api.seeip.org/geoip/')))
                   .body)[key]
           .toString();
-      if (_json == 'null') {
+      if (json == 'null') {
         return '$key not found';
       } else {
-        return _json;
+        return json;
       }
     } on Exception catch (e) {
       return e.toString();
@@ -328,18 +327,18 @@ class IpAddress extends IpRepository {
 
   /// A function that retrieves specific information for a given IP address from the SeeIP API.
   /// Takes in 'key' as the information to retrieve and 'ip' as the IP address to query.
-  /// Returns a Future<String> with the requested information or an error message.
+  /// Returns a `Future<String>` with the requested information or an error message.
   @override
   Future<String> getSeeIpFor({required String key, required String ip}) async {
     try {
-      var _json = jsonDecode(
+      var json = jsonDecode(
               (await http.get(Uri.parse('https://api.seeip.org/geoip/$ip')))
                   .body)[key]
           .toString();
-      if (_json == 'null') {
+      if (json == 'null') {
         return '$key not found';
       } else {
-        return _json;
+        return json;
       }
     } on Exception catch (e) {
       return e.toString();
